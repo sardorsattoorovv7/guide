@@ -1,1 +1,516 @@
-<h1>test</h1>
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guide · touristlar uchun</title>
+  <!-- Google Fonts va ikonlar -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, #f2f7fb 0%, #e3ecf3 100%);
+      font-family: 'Inter', sans-serif;
+      padding: 1.8rem;
+    }
+
+    /* ===== ASOSIY KARTA ===== */
+    .guide-card {
+      max-width: 920px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 48px;
+      padding: 2.8rem 3rem;
+      box-shadow: 
+        0 32px 64px -24px rgba(10, 30, 50, 0.25),
+        0 8px 24px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: all 0.2s ease;
+    }
+
+    /* ===== HEADER: "guide" + tourist badge ===== */
+    .guide-header {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .guide-header h1 {
+      font-size: 3.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #1b3f5c, #2f6a8f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+      line-height: 1.1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .guide-header h1 i {
+      -webkit-text-fill-color: initial;
+      color: #2f6a8f;
+      font-size: 2.4rem;
+      opacity: 0.75;
+      transition: transform 0.25s ease;
+    }
+
+    .guide-header h1:hover i {
+      transform: rotate(-8deg) scale(1.08);
+    }
+
+    .guide-header .badge-tourist {
+      background: rgba(47, 106, 143, 0.08);
+      backdrop-filter: blur(4px);
+      padding: 0.45rem 1.4rem;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #1b4b6a;
+      border: 1px solid rgba(47, 106, 143, 0.15);
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      margin-left: auto;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .guide-header .badge-tourist i {
+      font-size: 0.9rem;
+      color: #2f6a8f;
+    }
+
+    /* ===== DEKORATIV CHIZIQ ===== */
+    .divider {
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(47, 106, 143, 0.2), rgba(47, 106, 143, 0.02));
+      margin: 0.8rem 0 2rem 0;
+      border-radius: 10px;
+    }
+
+    /* ===== MAIN GRID: 2 COLUMN ===== */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 2.2rem;
+      align-items: start;
+    }
+
+    /* ===== CHAP PANEL – GUIDE HAQIDA ===== */
+    .guide-info {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(6px);
+      border-radius: 28px;
+      padding: 1.8rem 1.8rem 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02);
+    }
+
+    .guide-info h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1a3142;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .guide-info h3 i {
+      color: #2f6a8f;
+      font-size: 1.3rem;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .info-row .icon-circle {
+      width: 38px;
+      height: 38px;
+      background: rgba(47, 106, 143, 0.06);
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1b4b6a;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .info-row .label {
+      font-weight: 500;
+      color: #1f3b4f;
+      font-size: 0.95rem;
+    }
+
+    .info-row .value {
+      margin-left: auto;
+      font-weight: 500;
+      color: #0b2b44;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 0.1rem 1rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    /* ===== O'NG PANEL – TOURISTLAR UCHUN ===== */
+    .tourist-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .tourist-card {
+      background: white;
+      border-radius: 28px;
+      padding: 1.5rem 1.8rem;
+      box-shadow: 0 8px 22px -8px rgba(10, 30, 50, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(2px);
+      transition: all 0.2s ease;
+    }
+
+    .tourist-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px -10px rgba(10, 30, 50, 0.14);
+      border-color: rgba(47, 106, 143, 0.15);
+    }
+
+    .tourist-card .card-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #1a3142;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .tourist-card .card-title i {
+      color: #2f6a8f;
+      font-size: 1.2rem;
+    }
+
+    .tourist-card .desc {
+      color: #3e5a6e;
+      font-weight: 400;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 0.8rem;
+    }
+
+    /* progress */
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(47, 106, 143, 0.08);
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 0.4rem 0 0.2rem;
+    }
+
+    .progress-bar .fill {
+      height: 100%;
+      width: 82%;
+      background: linear-gradient(90deg, #2f6a8f, #5a9bc2);
+      border-radius: 20px;
+      box-shadow: 0 0 8px rgba(47, 106, 143, 0.15);
+    }
+
+    .progress-bar .fill.slim {
+      width: 64%;
+    }
+
+    .progress-bar .fill.high {
+      width: 93%;
+    }
+
+    /* taglar */
+    .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.6rem;
+    }
+
+    .tag {
+      background: rgba(47, 106, 143, 0.05);
+      padding: 0.25rem 1.1rem;
+      border-radius: 40px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #1b4b6a;
+      border: 1px solid rgba(47, 106, 143, 0.08);
+      letter-spacing: 0.2px;
+    }
+
+    .tag i {
+      margin-right: 5px;
+      font-size: 0.7rem;
+      opacity: 0.7;
+    }
+
+    .tag.accent {
+      background: rgba(47, 106, 143, 0.1);
+      border-color: rgba(47, 106, 143, 0.15);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer-note {
+      margin-top: 2.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(0,0,0,0.02);
+    }
+
+    .footer-note span {
+      font-size: 0.85rem;
+      color: #3e5a6e;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.4);
+      padding: 0.3rem 1.2rem;
+      border-radius: 60px;
+      backdrop-filter: blur(2px);
+    }
+
+    .footer-note .dot {
+      width: 8px;
+      height: 8px;
+      background: #4b8bb0;
+      border-radius: 20px;
+      display: inline-block;
+      animation: pulse-dot 2.4s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.2); }
+      100% { opacity: 0.4; transform: scale(0.9); }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 720px) {
+      .guide-card {
+        padding: 2rem 1.5rem;
+        border-radius: 36px;
+      }
+      .guide-header h1 {
+        font-size: 2.8rem;
+      }
+      .guide-header h1 i {
+        font-size: 1.8rem;
+      }
+      .guide-header .badge-tourist {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+        margin-top: 0.3rem;
+      }
+      .content-grid {
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
+      }
+      .guide-info {
+        padding: 1.5rem;
+      }
+      .tourist-card {
+        padding: 1.2rem 1.4rem;
+      }
+      .footer-note {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .guide-header h1 {
+        font-size: 2.2rem;
+      }
+      .guide-card {
+        padding: 1.5rem 1rem;
+      }
+    }
+
+    /* ===== ANIMATION ===== */
+    .guide-card {
+      animation: fadeSlide 0.6s cubic-bezier(0.15, 0.85, 0.35, 1) forwards;
+    }
+
+    @keyframes fadeSlide {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="guide-card">
+    <!-- HEADER: guide + tourist badge -->
+    <div class="guide-header">
+      <h1>
+        <i class="fas fa-map-location-dot"></i> 
+        guide
+      </h1>
+      <span class="badge-tourist">
+        <i class="fas fa-people-group"></i> 
+        touristlar uchun
+      </span>
+    </div>
+
+    <!-- asosiy grid -->
+    <div class="content-grid">
+      <!-- chap: guide ma'lumotlari -->
+      <div class="guide-info">
+        <h3>
+          <i class="fas fa-circle-info"></i> 
+          Guide haqida
+        </h3>
+        <div class="info-row">
+          <span class="icon-circle"><i class="fas fa-user-tie"></i></span>
+          <span class="label">Ism</span>
+          <span class="value">Anvar</span>
+        </div>
+        <div class="info-row">
+          <span class="icon-circle"><i class="fas fa-flag"></i></span>
+          <span class="label">Til</span>
+          <span class="value">O'zbek, Rus, Eng</span>
+        </div>
+        <div class="info-row">
+          <span class="icon-circle"><i class="fas fa-star"></i></span>
+          <span class="label">Reyting</span>
+          <span class="value">4.9 ★</span>
+        </div>
+        <div class="info-row">
+          <span class="icon-circle"><i class="fas fa-suitcase"></i></span>
+          <span class="label">Ekskursiyalar</span>
+          <span class="value">27 ta</span>
+        </div>
+        <div style="margin-top: 1.2rem; padding-top: 0.8rem; border-top: 1px dashed rgba(0,0,0,0.05);">
+          <span style="font-size: 0.85rem; color: #3e5a6e; display: flex; gap: 0.4rem; align-items: center;">
+            <i class="fas fa-location-dot" style="color: #2f6a8f;"></i> 
+            Samarqand, Buxoro, Toshkent
+          </span>
+        </div>
+      </div>
+
+      <!-- o'ng: touristlar uchun maxsus -->
+      <div class="tourist-panel">
+        <!-- karta 1 -->
+        <div class="tourist-card">
+          <div class="card-title">
+            <i class="fas fa-person-walking-luggage"></i> 
+            Guruh holati
+          </div>
+          <div class="desc">
+            <span style="font-weight: 600;">8</span> nafar sayyoh, 
+            <span style="font-weight: 600;">3</span> oila, 
+            <span style="font-weight: 600;">2</span> ta bolali.
+          </div>
+          <div class="progress-bar">
+            <div class="fill high"></div>
+          </div>
+          <div style="display: flex; justify-content: flex-end; margin-top: 4px;">
+            <span style="font-size: 0.7rem; font-weight: 500; color: #2f6a8f; background: rgba(47,106,143,0.06); padding: 0.1rem 0.9rem; border-radius: 30px;">93% qoniqish</span>
+          </div>
+        </div>
+
+        <!-- karta 2 – touristlar olib yuradigan narsalar -->
+        <div class="tourist-card">
+          <div class="card-title">
+            <i class="fas fa-backpack"></i> 
+            Sayyohlar bilan
+          </div>
+          <div class="desc" style="margin-bottom: 0.2rem;">
+            <i class="fas fa-check-circle" style="color: #2f6a8f; width: 16px;"></i>  kamera, suv, xarita, zont
+          </div>
+          <div class="tag-group">
+            <span class="tag"><i class="fas fa-camera"></i> Kamera</span>
+            <span class="tag"><i class="fas fa-bottle-water"></i> Suv</span>
+            <span class="tag"><i class="fas fa-map"></i> Xarita</span>
+            <span class="tag accent"><i class="fas fa-umbrella"></i> Zont</span>
+            <span class="tag"><i class="fas fa-sun"></i> Krem</span>
+          </div>
+          <div style="margin-top: 0.7rem;">
+            <div class="progress-bar">
+              <div class="fill slim"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 3px; font-size: 0.7rem; color: #3e5a6e;">
+              <span>🧳 yuk tayyor</span>
+              <span>64%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- kichik qo'shimcha ma'lumot -->
+        <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: flex-start; margin-top: 0.2rem;">
+          <span style="background: rgba(47, 106, 143, 0.02); border: 1px solid rgba(47, 106, 143, 0.06); border-radius: 60px; padding: 0.25rem 1.2rem; font-size: 0.75rem; color: #1b4b6a;">
+            <i class="far fa-calendar"></i> 18-iyun, 2026
+          </span>
+          <span style="background: rgba(47, 106, 143, 0.02); border: 1px solid rgba(47, 106, 143, 0.06); border-radius: 60px; padding: 0.25rem 1.2rem; font-size: 0.75rem; color: #1b4b6a;">
+            <i class="far fa-clock"></i> 09:30
+          </span>
+          <span style="background: rgba(47, 106, 143, 0.02); border: 1px solid rgba(47, 106, 143, 0.06); border-radius: 60px; padding: 0.25rem 1.2rem; font-size: 0.75rem; color: #1b4b6a;">
+            <i class="fas fa-people-arrows"></i> 8 kishi
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-note">
+      <span>
+        <i class="fas fa-circle-check" style="color: #2f6a8f;"></i> 
+        Barcha gidlar tayyor
+      </span>
+      <span>
+        <span class="dot"></span> 
+        jonli sayohat rejimi
+      </span>
+      <span>
+        <i class="fas fa-chevron-right" style="font-size: 0.6rem; opacity: 0.6;"></i> 
+        touristlar uchun maxsus
+      </span>
+    </div>
+  </div>
+</body>
+</html>
